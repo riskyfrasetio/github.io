@@ -294,41 +294,41 @@ library(MLmetrics)
 tuning.svm&lt;- tune(svm, train.x=data.train[,-ncol(data.train)], train.y=data.train[,ncol(data.train)],kernel=&quot;radial&quot;,ranges=list(cost=10^(-3:3), gamma=c(10^(-2:2))))
 tuning.svm$performances[,-4]</code></pre>
 <pre><code>##     cost gamma      error
-## 1  1e-03 1e-02 0.15598291
-## 2  1e-02 1e-02 0.15598291
-## 3  1e-01 1e-02 0.15598291
-## 4  1e+00 1e-02 0.10384615
-## 5  1e+01 1e-02 0.05569801
+## 1  1e-03 1e-02 0.15626781
+## 2  1e-02 1e-02 0.15626781
+## 3  1e-01 1e-02 0.15626781
+## 4  1e+00 1e-02 0.10056980
+## 5  1e+01 1e-02 0.05940171
 ## 6  1e+02 1e-02 0.04829060
 ## 7  1e+03 1e-02 0.05569801
-## 8  1e-03 1e-01 0.15598291
-## 9  1e-02 1e-01 0.15598291
-## 10 1e-01 1e-01 0.13717949
-## 11 1e+00 1e-01 0.04829060
+## 8  1e-03 1e-01 0.15626781
+## 9  1e-02 1e-01 0.15626781
+## 10 1e-01 1e-01 0.13034188
+## 11 1e+00 1e-01 0.05199430
 ## 12 1e+01 1e-01 0.05199430
-## 13 1e+02 1e-01 0.08162393
-## 14 1e+03 1e-01 0.08190883
-## 15 1e-03 1e+00 0.15598291
-## 16 1e-02 1e+00 0.15598291
-## 17 1e-01 1e+00 0.15227920
-## 18 1e+00 1e+00 0.05940171
-## 19 1e+01 1e+00 0.07806268
-## 20 1e+02 1e+00 0.08575499
-## 21 1e+03 1e+00 0.08575499
-## 22 1e-03 1e+01 0.15598291
-## 23 1e-02 1e+01 0.15598291
-## 24 1e-01 1e+01 0.15598291
-## 25 1e+00 1e+01 0.15227920
-## 26 1e+01 1e+01 0.14116809
-## 27 1e+02 1e+01 0.14116809
-## 28 1e+03 1e+01 0.14116809
-## 29 1e-03 1e+02 0.15598291
-## 30 1e-02 1e+02 0.15598291
-## 31 1e-01 1e+02 0.15598291
-## 32 1e+00 1e+02 0.15598291
-## 33 1e+01 1e+02 0.15598291
-## 34 1e+02 1e+02 0.15598291
-## 35 1e+03 1e+02 0.15598291</code></pre>
+## 13 1e+02 1e-01 0.06680912
+## 14 1e+03 1e-01 0.09643875
+## 15 1e-03 1e+00 0.15626781
+## 16 1e-02 1e+00 0.15626781
+## 17 1e-01 1e+00 0.15626781
+## 18 1e+00 1e+00 0.05569801
+## 19 1e+01 1e+00 0.07051282
+## 20 1e+02 1e+00 0.08917379
+## 21 1e+03 1e+00 0.08917379
+## 22 1e-03 1e+01 0.15626781
+## 23 1e-02 1e+01 0.15626781
+## 24 1e-01 1e+01 0.15626781
+## 25 1e+00 1e+01 0.15256410
+## 26 1e+01 1e+01 0.14145299
+## 27 1e+02 1e+01 0.14145299
+## 28 1e+03 1e+01 0.14145299
+## 29 1e-03 1e+02 0.15626781
+## 30 1e-02 1e+02 0.15626781
+## 31 1e-01 1e+02 0.15626781
+## 32 1e+00 1e+02 0.15626781
+## 33 1e+01 1e+02 0.15626781
+## 34 1e+02 1e+02 0.15626781
+## 35 1e+03 1e+02 0.15626781</code></pre>
 <p>diperoleh parameter terbaik saat melakukan tuning yakni dengan cost=100 dan gamma=0.01. selanjutnya model akan dibangun pada data training menggunakan parameter tersebut dan melakukan prediksi pada data testing menggunkaan model tersebut.</p>
 <pre class="r"><code>model.svm=svm(class~.,data=data.train,scale=TRUE,kernel=&quot;radial&quot;,cost=tuning.svm$best.parameters[1],gamma=tuning.svm$best.parameters[2],type=&quot;C-classification&quot;)
 prediksi.svm=predict(model.svm,data.test[,-ncol(data.test)])
@@ -388,10 +388,10 @@ specificity.adasyn.svm=Specificity(data.test$class,prediksi.adasyn.svm,positive 
 G.mean.adasyn.svm=sqrt(sensitivity.adasyn.svm*specificity.adasyn.svm)
 print(rbind(akurasi.adasyn.svm,sensitivity.adasyn.svm,specificity.adasyn.svm,G.mean.adasyn.svm))</code></pre>
 <pre><code>##                             [,1]
-## akurasi.adasyn.svm     0.9701493
+## akurasi.adasyn.svm     0.9552239
 ## sensitivity.adasyn.svm 0.9000000
-## specificity.adasyn.svm 0.9824561
-## G.mean.adasyn.svm      0.9403247</code></pre>
+## specificity.adasyn.svm 0.9649123
+## G.mean.adasyn.svm      0.9318911</code></pre>
 </div>
 </div>
 
