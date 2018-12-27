@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R Markdown on blog sains</title>
+    <link>https://riskyfrasetio.github.io/tags/r-markdown/</link>
+    <description>Recent content in R Markdown on blog sains</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 04 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://riskyfrasetio.github.io/tags/r-markdown/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Klasifikasi Data Imbalance Menggunakan Support Vector Machine</title>
+      <link>https://riskyfrasetio.github.io/2018/09/postingan-pertama/</link>
+      <pubDate>Tue, 04 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://riskyfrasetio.github.io/2018/09/postingan-pertama/</guid>
+      <description>Pada tulisan pertama saya ini, saya akan memberikan bahasan mengenai klasifikasi pada data atau kelas imbalance menggunakan Support Vector Machine beserta penerapan dalam mengatasi kasus tersebut menggunakan R. Namun sebelumnya saya akan sedikit membahas mengenai apa itu kelas imbalance dan bagaimana dampaknya terhadap hasil klasifikasi?
+1. PendahuluanKadangkala kita menemui masalah saat mengerjakan suatu projek klasifikasi. Katakanlah, anda mendapatkan nilai akurasi sebesar 90% sehingga anda merasa cukup senang dengan hasil tersebut.</description>
+    </item>
+    
+    <item>
+      <title>Hello R Markdown</title>
+      <link>https://riskyfrasetio.github.io/2015/07/hello-r-markdown/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>https://riskyfrasetio.github.io/2015/07/hello-r-markdown/</guid>
+      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+You can embed an R code chunk like this:
+summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+    </item>
+    
+  </channel>
+</rss>
