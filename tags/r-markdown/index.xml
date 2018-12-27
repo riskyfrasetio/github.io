@@ -17,7 +17,7 @@
       <pubDate>Tue, 04 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>https://riskyfrasetio.github.io/2018/09/postingan-pertama/</guid>
-      <description>Pada tulisan pertama saya ini, saya akan memberikan bahasan mengenai klasifikasi pada data atau kelas imbalance menggunakan Support Vector Machine beserta penerapan dalam mengatasi kasus tersebut menggunakan R. Namun sebelumnya saya akan sedikit membahas mengenai apa itu kelas imbalance dan bagaimana dampaknya terhadap hasil klasifikasi?
+      <description>body {text-align: justify}Pada tulisan pertama saya ini, saya akan memberikan bahasan mengenai klasifikasi pada data atau kelas imbalance menggunakan Support Vector Machine beserta penerapan dalam mengatasi kasus tersebut menggunakan R. Namun sebelumnya saya akan sedikit membahas mengenai apa itu kelas imbalance dan bagaimana dampaknya terhadap hasil klasifikasi?
 1. PendahuluanKadangkala kita menemui masalah saat mengerjakan suatu projek klasifikasi. Katakanlah, anda mendapatkan nilai akurasi sebesar 90% sehingga anda merasa cukup senang dengan hasil tersebut.</description>
     </item>
     

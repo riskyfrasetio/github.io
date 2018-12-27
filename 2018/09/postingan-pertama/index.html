@@ -28,9 +28,9 @@
     
 
     
-    <meta name="description" content="Pada tulisan pertama saya ini, saya akan memberikan bahasan mengenai klasifikasi pada data atau kelas imbalance menggunakan Support Vector Machine beserta penerapan dalam mengatasi kasus tersebut menggunakan R. Namun sebelumnya saya akan sedikit membahas mengenai apa itu kelas imbalance dan bagaimana dampaknya terhadap hasil klasifikasi?
+    <meta name="description" content="body {text-align: justify}Pada tulisan pertama saya ini, saya akan memberikan bahasan mengenai klasifikasi pada data atau kelas imbalance menggunakan Support Vector Machine beserta penerapan dalam mengatasi kasus tersebut menggunakan R. Namun sebelumnya saya akan sedikit membahas mengenai apa itu kelas imbalance dan bagaimana dampaknya terhadap hasil klasifikasi?
 1. PendahuluanKadangkala kita menemui masalah saat mengerjakan suatu projek klasifikasi. Katakanlah, anda mendapatkan nilai akurasi sebesar 90% sehingga anda merasa cukup senang dengan hasil tersebut.">
-    <meta property="og:description" content="Pada tulisan pertama saya ini, saya akan memberikan bahasan mengenai klasifikasi pada data atau kelas imbalance menggunakan Support Vector Machine beserta penerapan dalam mengatasi kasus tersebut menggunakan R. Namun sebelumnya saya akan sedikit membahas mengenai apa itu kelas imbalance dan bagaimana dampaknya terhadap hasil klasifikasi?
+    <meta property="og:description" content="body {text-align: justify}Pada tulisan pertama saya ini, saya akan memberikan bahasan mengenai klasifikasi pada data atau kelas imbalance menggunakan Support Vector Machine beserta penerapan dalam mengatasi kasus tersebut menggunakan R. Namun sebelumnya saya akan sedikit membahas mengenai apa itu kelas imbalance dan bagaimana dampaknya terhadap hasil klasifikasi?
 1. PendahuluanKadangkala kita menemui masalah saat mengerjakan suatu projek klasifikasi. Katakanlah, anda mendapatkan nilai akurasi sebesar 90% sehingga anda merasa cukup senang dengan hasil tersebut.">
     <meta property="og:type" content="blog">
     <meta property="og:title" content="Klasifikasi Data Imbalance Menggunakan Support Vector Machine">
@@ -38,7 +38,7 @@
     <meta property="og:site_name" content="blog sains">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="blog sains">
-    <meta name="twitter:description" content="Pada tulisan pertama saya ini, saya akan memberikan bahasan mengenai klasifikasi pada data atau kelas imbalance menggunakan Support Vector Machine beserta penerapan dalam mengatasi kasus tersebut menggunakan R. Namun sebelumnya saya akan sedikit membahas mengenai apa itu kelas imbalance dan bagaimana dampaknya terhadap hasil klasifikasi?
+    <meta name="twitter:description" content="body {text-align: justify}Pada tulisan pertama saya ini, saya akan memberikan bahasan mengenai klasifikasi pada data atau kelas imbalance menggunakan Support Vector Machine beserta penerapan dalam mengatasi kasus tersebut menggunakan R. Namun sebelumnya saya akan sedikit membahas mengenai apa itu kelas imbalance dan bagaimana dampaknya terhadap hasil klasifikasi?
 1. PendahuluanKadangkala kita menemui masalah saat mengerjakan suatu projek klasifikasi. Katakanlah, anda mendapatkan nilai akurasi sebesar 90% sehingga anda merasa cukup senang dengan hasil tersebut.">
     
     
@@ -231,7 +231,11 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>Pada tulisan pertama saya ini, saya akan memberikan bahasan mengenai klasifikasi pada data atau kelas imbalance menggunakan Support Vector Machine beserta penerapan dalam mengatasi kasus tersebut menggunakan R. Namun sebelumnya saya akan sedikit membahas mengenai apa itu kelas imbalance dan bagaimana dampaknya terhadap hasil klasifikasi?</p>
+              <style>
+body {
+text-align: justify}
+</style>
+<p>Pada tulisan pertama saya ini, saya akan memberikan bahasan mengenai klasifikasi pada data atau kelas imbalance menggunakan Support Vector Machine beserta penerapan dalam mengatasi kasus tersebut menggunakan R. Namun sebelumnya saya akan sedikit membahas mengenai apa itu kelas imbalance dan bagaimana dampaknya terhadap hasil klasifikasi?</p>
 <p><img src="C:/Users/Risky/Desktop/github/blogdown_source/static/img/gambar1.jpg" /><!-- --></p>
 <div id="pendahuluan" class="section level1">
 <h1>1. Pendahuluan</h1>
@@ -239,8 +243,8 @@
 </div>
 <div id="mengatasi-kelas-imbalance" class="section level1">
 <h1>2. Mengatasi Kelas Imbalance</h1>
-<p>Lalu bagaimana cara mengatasi permasalahan tersebut? terdapat beberapa pendekatan yang dapat dilakukan dalam meng-handle masalah tersebut, diantaranya pendekatan yang berbasis preprocessing data (sampling), algoritma, ensemble serta gabungan dari beberapa pendekatan tersebut. Namun disini saya hanya akan memberikan tutorial pendekatan yang berbasis pada preprocessing data yakni algoritma over sampling SMOTE dan AdaSyn serta algoritma under sampling RUS.</p>
-<p>disini saya akan menggunakan data ecoli yang dapat didownload pada situs <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/ecoli" class="uri">https://archive.ics.uci.edu/ml/machine-learning-databases/ecoli</a>.</p>
+<p>Lalu bagaimana cara mengatasi permasalahan tersebut? terdapat beberapa pendekatan yang dapat dilakukan dalam meng-handle masalah tersebut, diantaranya pendekatan yang berbasis preprocessing data (sampling), pemodifikasian algoritma klasifikasi nya itu sendiri, ensemble (boosting, bagging, dll) serta gabungan dari beberapa pendekatan tersebut. Namun disini saya hanya akan memberikan tutorial pendekatan yang berbasis pada preprocessing data yakni algoritma over sampling SMOTE dan AdaSyn serta algoritma under sampling RUS.</p>
+<p>Disini saya akan menggunakan data ecoli yang dapat didownload pada situs <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/ecoli">ini</a>.</p>
 <pre class="r"><code>url=&quot;https://archive.ics.uci.edu/ml/machine-learning-databases/ecoli/ecoli.data&quot;
 ecoli=read.table(url,header=FALSE)
 names(ecoli)=c(&quot;sequence_names&quot;,&quot;mcg&quot;,&quot;gvh&quot;,&quot;lip&quot;,&quot;chg&quot;,&quot;aac&quot;,&quot;alm1&quot;,&quot;alm2&quot;,&quot;class&quot;)
@@ -267,7 +271,7 @@ head(ecoli,10)</code></pre>
 ##  $ alm1          : num  0.24 0.35 0.37 0.45 0.25 0.38 0.23 0.28 0.51 0.18 ...
 ##  $ alm2          : num  0.35 0.44 0.46 0.36 0.35 0.46 0.34 0.39 0.57 0.3 ...
 ##  $ class         : Factor w/ 8 levels &quot;cp&quot;,&quot;im&quot;,&quot;imL&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
-<p>lalu saya berikan nama variabel sesuai dengan page dataset description pada situs tersebut. Untuk mempersimple kasus ini, maka saya akan mereduksi kasus ini menjadi kasus klasifikasi biner dengan membuat variabel kelas selain pp menjadi kelas other.</p>
+<p>lalu saya berikan nama variabel sesuai dengan halaman dataset description pada situs tersebut. Untuk mempersimple kasus ini, maka saya akan mereduksi kasus ini menjadi kasus klasifikasi biner dengan membuat variabel kelas selain pp menjadi kelas other.</p>
 <pre class="r"><code>ecoli$class=ifelse(ecoli$class!=&quot;pp&quot;,&quot;other&quot;,&quot;pp&quot;)
 ecoli$class=as.factor(ecoli$class)
 table(ecoli$class)</code></pre>
@@ -279,16 +283,13 @@ IR</code></pre>
 <pre><code>## [1] 5.461538</code></pre>
 <pre class="r"><code>ecoli.used=ecoli[,-c(1,5)]
 pairs(ecoli.used[,-ncol(ecoli.used)],col=ecoli.used$class)</code></pre>
-<p><img src="https://riskyfrasetio.github.io/post/2018-09-04-postingan-pertama_files/figure-html/biner-1.png" width="672" /></p>
-<p>variabel chg tidak diikutsertakan dalam analisis dikarenakan memiliki nilai yang sama untuk semua pengamatan. Berikut scatter plot untuk variabel gvh dan alm2 yang diperbesar</p>
-<pre class="r"><code>plot(ecoli.used$gvh,ecoli.used$alm2,col=ecoli.used$class,xlab=&quot;gvh&quot;,ylab=&quot;alm2&quot;)</code></pre>
-<p><img src="https://riskyfrasetio.github.io/post/2018-09-04-postingan-pertama_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<p>dapat dilihat bahwa proporsi antara kelas mayor dan minor (rasio imbalance) pada data tersebut yakni sebesar 5.4615385. selanjutnya data tersebut akan dibagi kedalam training dan testing menggunakan stratified holdout dengan proporsi 80% training dan 20% testing. Stratified disini bertujuan untuk menjaga rasio kelas imbalance di dalam data train dan data test tetap atau hampir sama dengan data set asal (ecoli).</p>
+<p><img src="https://riskyfrasetio.github.io/post/2018-09-04-postingan-pertama_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>variabel chg tidak diikutsertakan dalam analisis dikarenakan memiliki nilai yang sama untuk semua pengamatan. Dapat dilihat bahwa proporsi antara kelas mayor dan minor (rasio imbalance) pada data tersebut yakni sebesar 5.4615385. selanjutnya data tersebut akan dibagi kedalam training dan testing menggunakan stratified holdout dengan proporsi 80% training dan 20% testing. Stratified disini bertujuan untuk menjaga rasio kelas imbalance di dalam data train dan data test tetap atau hampir sama dengan data set asal (ecoli).</p>
 <pre class="r"><code>library(rminer)
 ff=holdout(ecoli.used$class,ratio=0.8,mode=&quot;stratified&quot;,seed=1)
 data.train=ecoli.used[ff$tr,]
 data.test=ecoli.used[ff$ts,]</code></pre>
-<p>classifier yang akan digunakan dalam tutorial ini yakni Support Vector Machine dengan kernel Radial Basis Function (RBF) dengan menggunakan solver libsvm pada package <code>e1071::svm</code>.</p>
+<p>classifier yang akan digunakan dalam tutorial ini yakni Support Vector Machine dengan kernel Radial Basis Function (RBF) dengan menggunakan solver <a href="https://www.csie.ntu.edu.tw/~cjlin/libsvm/">libsvm</a> pada package <code>e1071::svm</code>.</p>
 <pre class="r"><code>library(e1071)
 library(MLmetrics)
 tuning.svm&lt;- tune(svm, train.x=data.train[,-ncol(data.train)], train.y=data.train[,ncol(data.train)],kernel=&quot;radial&quot;,ranges=list(cost=10^(-3:3), gamma=c(10^(-2:2))))
@@ -298,30 +299,30 @@ tuning.svm$performances[,-4]</code></pre>
 ## 2  1e-02 1e-02 0.15626781
 ## 3  1e-01 1e-02 0.15626781
 ## 4  1e+00 1e-02 0.10056980
-## 5  1e+01 1e-02 0.05940171
-## 6  1e+02 1e-02 0.04829060
-## 7  1e+03 1e-02 0.05569801
+## 5  1e+01 1e-02 0.05569801
+## 6  1e+02 1e-02 0.04458689
+## 7  1e+03 1e-02 0.05199430
 ## 8  1e-03 1e-01 0.15626781
 ## 9  1e-02 1e-01 0.15626781
-## 10 1e-01 1e-01 0.13034188
-## 11 1e+00 1e-01 0.05199430
-## 12 1e+01 1e-01 0.05199430
+## 10 1e-01 1e-01 0.14515670
+## 11 1e+00 1e-01 0.04829060
+## 12 1e+01 1e-01 0.04829060
 ## 13 1e+02 1e-01 0.06680912
-## 14 1e+03 1e-01 0.09643875
+## 14 1e+03 1e-01 0.08162393
 ## 15 1e-03 1e+00 0.15626781
 ## 16 1e-02 1e+00 0.15626781
 ## 17 1e-01 1e+00 0.15626781
 ## 18 1e+00 1e+00 0.05569801
-## 19 1e+01 1e+00 0.07051282
-## 20 1e+02 1e+00 0.08917379
-## 21 1e+03 1e+00 0.08917379
+## 19 1e+01 1e+00 0.06680912
+## 20 1e+02 1e+00 0.07792023
+## 21 1e+03 1e+00 0.07792023
 ## 22 1e-03 1e+01 0.15626781
 ## 23 1e-02 1e+01 0.15626781
 ## 24 1e-01 1e+01 0.15626781
-## 25 1e+00 1e+01 0.15256410
-## 26 1e+01 1e+01 0.14145299
-## 27 1e+02 1e+01 0.14145299
-## 28 1e+03 1e+01 0.14145299
+## 25 1e+00 1e+01 0.15626781
+## 26 1e+01 1e+01 0.14131054
+## 27 1e+02 1e+01 0.14131054
+## 28 1e+03 1e+01 0.14131054
 ## 29 1e-03 1e+02 0.15626781
 ## 30 1e-02 1e+02 0.15626781
 ## 31 1e-01 1e+02 0.15626781
@@ -336,7 +337,8 @@ akurasi.svm=Accuracy(data.test$class,prediksi.svm)
 sensitivity.svm=Sensitivity(data.test$class,prediksi.svm,positive = &quot;pp&quot;)
 specificity.svm=Specificity(data.test$class,prediksi.svm,positive = &quot;pp&quot;)
 G.mean.svm=sqrt(sensitivity.svm*specificity.svm)
-print(rbind(akurasi.svm,sensitivity.svm,specificity.svm,G.mean.svm))</code></pre>
+hasil.svm=rbind(akurasi.svm,sensitivity.svm,specificity.svm,G.mean.svm)
+hasil.svm</code></pre>
 <pre><code>##                      [,1]
 ## akurasi.svm     0.9701493
 ## sensitivity.svm 0.8000000
@@ -346,7 +348,7 @@ print(rbind(akurasi.svm,sensitivity.svm,specificity.svm,G.mean.svm))</code></pre
 <div id="smote" class="section level2">
 <h2>SMOTE</h2>
 <p>SMOTE merupakan algoritma oversampling yang pada prinsipnya bekerja melakukan duplikasi dengan membuat data sintetis pada kelas minor berdasarkan k-tetangga terdekat yang diperoleh dengan menghitung jarak euclidean terdekat terhadap pengamatan yang akan di duplikasi. Jumlah duplikasi yang dilakukan ditentukan sedemikian rupa sehingga nantinya rasio antara kelas mayor dan kelas minor + kelas minor sintetis akan mendekati balance. sampel sintetis dibentuk berdasarkan persamaan berikut</p>
-<p><span class="math display">\[\vec{x_{sintetis}}=\vec{x_i} + (\vec{x_{knn}} -\vec{x_i})rand(0,1)\]</span> pada proses membuat data sintetis dengan algoritma SMOTE, saya menggunakan <code>DMwR::SMOTE</code>.</p>
+<p><span class="math display">\[\vec{x_{sintetis}}=\vec{x_i} + (\vec{x_{knn}} -\vec{x_i})rand(0,1)\]</span> pada proses membuat data sintetis dengan algoritma SMOTE, saya menggunakan <code>DMwR::SMOTE</code>. Untuk referensi lebih detil mengenai SMOTE dapat dilihat <a href="https://arxiv.org/pdf/1106.1813.pdf">disini</a></p>
 <pre class="r"><code>library(DMwR)
 datamayor=data.train[data.train[,ncol(data.train)]==&quot;other&quot;,]
 dataminor.baru=SMOTE(class~.,data.train,k=5,perc.over = 400,perc.under=0)
@@ -362,7 +364,8 @@ akurasi.smote.svm=Accuracy(data.test$class,prediksi.smote.svm)
 sensitivity.smote.svm=Sensitivity(data.test$class,prediksi.smote.svm,positive = &quot;pp&quot;)
 specificity.smote.svm=Specificity(data.test$class,prediksi.smote.svm,positive = &quot;pp&quot;)
 G.mean.smote.svm=sqrt(sensitivity.smote.svm*specificity.smote.svm)
-print(rbind(akurasi.smote.svm,sensitivity.smote.svm,specificity.smote.svm,G.mean.smote.svm))</code></pre>
+hasil.smote=rbind(akurasi.smote.svm,sensitivity.smote.svm,specificity.smote.svm,G.mean.smote.svm)
+hasil.smote</code></pre>
 <pre><code>##                            [,1]
 ## akurasi.smote.svm     0.9850746
 ## sensitivity.smote.svm 0.9000000
@@ -371,7 +374,7 @@ print(rbind(akurasi.smote.svm,sensitivity.smote.svm,specificity.smote.svm,G.mean
 </div>
 <div id="adasyn" class="section level2">
 <h2>ADASYN</h2>
-<p>Algoritma ini merupakan algoritma yang berdasar pada pendekatan oversampling sama halnya dengan algoritma SMOTE. Namun yang berbeda yakni ide meberikan suatu distribusi bobot kepada pengamatan kelas minor berdasarkan tingkat kesulitan sampel tersebut untuk dipelajari yang mana nanti digunakan sebagai suatu acuan dalam memutuskan jumlah sampel sintetis yang akan di bangkitkan oleh setiap pengamatan kelas minor secara otomatis. Dengan kata lain setiap sampel kelas minor akan membangkitkan jumlah sampel sintetis yang berbeda-beda tidak seperti algoritma SMOTE yang mana setiap sampel kelas minor berkontribusi membangkitkan jumlah sampel yang sama.</p>
+<p>Algoritma ini merupakan algoritma yang berdasar pada pendekatan oversampling sama halnya dengan algoritma SMOTE. Namun yang berbeda yakni ide meberikan suatu distribusi bobot kepada pengamatan kelas minor berdasarkan tingkat kesulitan sampel tersebut untuk dipelajari yang mana nanti digunakan sebagai suatu acuan dalam memutuskan jumlah sampel sintetis yang akan di bangkitkan oleh setiap pengamatan kelas minor secara otomatis. Dengan kata lain setiap sampel kelas minor akan membangkitkan jumlah sampel sintetis yang berbeda-beda tidak seperti algoritma SMOTE yang mana setiap sampel kelas minor berkontribusi membangkitkan jumlah sampel yang sama. Sumber referensi yang lebih detil <a href="https://sci2s.ugr.es/keel/pdf/algorithm/congreso/2008-He-ieee.pdf">disini</a></p>
 <pre class="r"><code>library(smotefamily)
 adasyn=ADAS(X=data.train[,-ncol(data.train)],target=data.train[,ncol(data.train)],K=5)
 data.balance1=rbind(datamayor,adasyn$syn_data)
@@ -386,12 +389,57 @@ akurasi.adasyn.svm=Accuracy(data.test$class,prediksi.adasyn.svm)
 sensitivity.adasyn.svm=Sensitivity(data.test$class,prediksi.adasyn.svm,positive = &quot;pp&quot;)
 specificity.adasyn.svm=Specificity(data.test$class,prediksi.adasyn.svm,positive = &quot;pp&quot;)
 G.mean.adasyn.svm=sqrt(sensitivity.adasyn.svm*specificity.adasyn.svm)
-print(rbind(akurasi.adasyn.svm,sensitivity.adasyn.svm,specificity.adasyn.svm,G.mean.adasyn.svm))</code></pre>
+hasil.adasyn=rbind(akurasi.adasyn.svm,sensitivity.adasyn.svm,specificity.adasyn.svm,G.mean.adasyn.svm)
+hasil.adasyn</code></pre>
 <pre><code>##                             [,1]
 ## akurasi.adasyn.svm     0.9552239
 ## sensitivity.adasyn.svm 0.9000000
 ## specificity.adasyn.svm 0.9649123
 ## G.mean.adasyn.svm      0.9318911</code></pre>
+</div>
+<div id="random-under-sampling" class="section level2">
+<h2>Random Under Sampling</h2>
+<p>Random under sampling atau RUS merupakan algoritma yang paling sederhana dalam penanganan kelas imbalance yakni dengan cara menghapus pengamatan kelas mayoritas secara random hingga diperoleh distribusi kelas yang balance. Contoh implementasinya sebagai berikut</p>
+<pre class="r"><code>rus &lt;- function()
+{
+  p &lt;- data.train[which(data.train[ ,&quot;class&quot;] == &quot;pp&quot;), ]
+  n &lt;- data.train[which(data.train[ ,&quot;class&quot;] == &quot;other&quot;), ]
+  n &lt;- n[sample(nrow(n), nrow(p), replace = TRUE), ]
+  result &lt;- rbind(p, n)
+  return(result)
+}
+data.balance2=rus()
+table(data.balance2$class)</code></pre>
+<pre><code>## 
+## other    pp 
+##    42    42</code></pre>
+<pre class="r"><code>model.rus.svm=svm(class~.,data=data.balance2,scale=TRUE,kernel=&quot;radial&quot;,cost=tuning.svm$best.parameters[1],gamma=tuning.svm$best.parameters[2],type=&quot;C-classification&quot;)
+prediksi.rus.svm=predict(model.rus.svm,data.test[,-ncol(data.test)])
+akurasi.rus.svm=Accuracy(data.test$class,prediksi.rus.svm)
+sensitivity.rus.svm=Sensitivity(data.test$class,prediksi.rus.svm,positive = &quot;pp&quot;)
+specificity.rus.svm=Specificity(data.test$class,prediksi.rus.svm,positive = &quot;pp&quot;)
+G.mean.rus.svm=sqrt(sensitivity.rus.svm*specificity.rus.svm)
+hasil.rus=rbind(akurasi.rus.svm,sensitivity.rus.svm,specificity.rus.svm,G.mean.rus.svm)
+hasil.rus</code></pre>
+<pre><code>##                          [,1]
+## akurasi.rus.svm     0.9104478
+## sensitivity.rus.svm 0.9000000
+## specificity.rus.svm 0.9122807
+## G.mean.rus.svm      0.9061195</code></pre>
+</div>
+<div id="kesimpulan" class="section level2">
+<h2>3.Kesimpulan</h2>
+<p>jika dibandingkan hasil performansi dari semua metode yang digunakan</p>
+<pre class="r"><code>hasil=cbind(hasil.svm,hasil.smote,hasil.adasyn,hasil.rus)
+colnames(hasil)=c(&quot;svm&quot;,&quot;smote.svm&quot;,&quot;adasyn.svm&quot;,&quot;rus.svm&quot;)
+row.names(hasil)=c(&quot;akurasi&quot;,&quot;sensitivity&quot;,&quot;specificity&quot;,&quot;G-mean&quot;)
+hasil</code></pre>
+<pre><code>##                   svm smote.svm adasyn.svm   rus.svm
+## akurasi     0.9701493 0.9850746  0.9552239 0.9104478
+## sensitivity 0.8000000 0.9000000  0.9000000 0.9000000
+## specificity 1.0000000 1.0000000  0.9649123 0.9122807
+## G-mean      0.8944272 0.9486833  0.9318911 0.9061195</code></pre>
+<p>ketiga metode sampling-based dalam penanganan kelas imbalance dapat meningkatkan akurasi dari prediksi kelas minoritas (sensitivity) dan G-mean, namun dari ketiga metode yang digunakan, smote-svm menghasilkan performansi yang paling tinggi pada kasus klasifikasi data ecoli ini.</p>
 </div>
 </div>
 
@@ -654,7 +702,7 @@ print(rbind(akurasi.adasyn.svm,sensitivity.adasyn.svm,specificity.adasyn.svm,G.m
                   Sep 9, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">Pada tulisan pertama saya ini, saya akan memberikan bahasan mengenai klasifikasi pada data atau kelas imbalance menggunakan Support Vector Machine beserta penerapan dalam mengatasi kasus tersebut menggunakan R. Namun sebelumnya saya akan sedikit membahas mengenai apa itu kelas imbalance dan bagaimana dampaknya terhadap hasil klasifikasi?
+              <div class="media-content hide-xs font-merryweather">body {text-align: justify}Pada tulisan pertama saya ini, saya akan memberikan bahasan mengenai klasifikasi pada data atau kelas imbalance menggunakan Support Vector Machine beserta penerapan dalam mengatasi kasus tersebut menggunakan R. Namun sebelumnya saya akan sedikit membahas mengenai apa itu kelas imbalance dan bagaimana dampaknya terhadap hasil klasifikasi?
 1. PendahuluanKadangkala kita menemui masalah saat mengerjakan suatu projek klasifikasi. Katakanlah, anda mendapatkan nilai akurasi sebesar 90% sehingga anda merasa cukup senang dengan hasil tersebut.</div>
             </div>
             <div style="clear:both;"></div>

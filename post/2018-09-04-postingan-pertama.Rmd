@@ -10,6 +10,10 @@ tags:
   - R Markdown
 ---
 
+<style>
+body {
+text-align: justify}
+</style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -29,11 +33,11 @@ include_graphics(img1_path)
 Kadangkala kita menemui masalah saat mengerjakan suatu projek klasifikasi. Katakanlah, anda mendapatkan nilai akurasi sebesar 90% sehingga anda merasa cukup senang dengan hasil tersebut. Namun kebahagiaan tersebut tidak berlangsung lama saat anda melihat matriks konfusi dan mendapati bahwa ternyata semua pengamatan yang berasal baik dari kelas a maupun kelas b hanya terklasifikasikan ke dalam suatu kelas (kelas a) yang berarti tidak terdapat pengamatan dari kelas b yang diklasifikasikan dengan benar ke kelas b. Maka masalah anda tersebut adalah masalah kelas imbalance. Kelas imbalance merupakan suatu kondisi dimana suatu kelas yang ingin diteliti cenderung terdistribusi lebih banyak atau lebih sedikit dibandingkan kelas yang lain. Kelas yang terdistribusi lebih banyak disebut kelas mayor sedangkan kelas yang terdistribusi lebih sedikit disebut kelas minor. Dalam aplikasi di lapangan, dataset seperti itu banyak sekali ditemukan. Contohnya pada data diagnosa penyakit, persetujuan kredit, dll. Dalam kasus dimana terdapat kelas imbalance tersebut, ketepatan hasil  klasifikasi pada kelas mayor akan cenderung tinggi, sementara ketepatan klasifikasi pada kelas minor akan cenderung rendah. Hal ini disebabkan karna kelas minor akan dianggap sebagai noise atau outlier oleh classifier saat membentuk suatu fungsi klasifikasi. Saya akan memberikan suatu ilustrasi dimana kelas imbalance menjadi suatu masalah yang sangat penting. Sebagai contoh, dalam diagnosa suatu penyakit, kelas positif yang akan diteliti adalah suatu kondisi medis yang langka (kelas minor) diantara banyaknya populasi normal (kelas mayor). Dalam kasus tersebut ketepatan klasifikasi pada kelas kondisi normal akan cenderung tinggi sementara ketepatan klasifikasi pada kondisi medis langka akan rendah. Bayangkan betapa besar kerugian saat seseorang yang seharusnya didiagnosa mengalami kondisi medis langka tapi justru didiagnosa masuk ke dalam kelas kondisi normal sehingga tidak mendapatkan treatment yang sesuai. 
 
 #2. Mengatasi Kelas Imbalance
-Lalu bagaimana cara mengatasi permasalahan tersebut? terdapat beberapa pendekatan yang dapat dilakukan dalam meng-handle masalah tersebut, diantaranya pendekatan yang berbasis preprocessing data (sampling), algoritma, ensemble serta gabungan dari beberapa pendekatan tersebut. Namun disini saya hanya akan memberikan tutorial pendekatan yang berbasis pada preprocessing data yakni algoritma over sampling SMOTE dan AdaSyn serta algoritma under sampling RUS. 
+Lalu bagaimana cara mengatasi permasalahan tersebut? terdapat beberapa pendekatan yang dapat dilakukan dalam meng-handle masalah tersebut, diantaranya pendekatan yang berbasis preprocessing data (sampling), pemodifikasian algoritma klasifikasi nya itu sendiri, ensemble (boosting, bagging, dll) serta gabungan dari beberapa pendekatan tersebut. Namun disini saya hanya akan memberikan tutorial pendekatan yang berbasis pada preprocessing data yakni algoritma over sampling SMOTE dan AdaSyn serta algoritma under sampling RUS. 
 
-disini saya akan menggunakan data ecoli yang dapat didownload pada situs https://archive.ics.uci.edu/ml/machine-learning-databases/ecoli. 
+Disini saya akan menggunakan data ecoli yang dapat didownload pada situs [ini](https://archive.ics.uci.edu/ml/machine-learning-databases/ecoli). 
 
-```{r ecoli}
+```{r}
 url="https://archive.ics.uci.edu/ml/machine-learning-databases/ecoli/ecoli.data"
 ecoli=read.table(url,header=FALSE)
 names(ecoli)=c("sequence_names","mcg","gvh","lip","chg","aac","alm1","alm2","class")
@@ -41,9 +45,9 @@ head(ecoli,10)
 str(ecoli)
 ```
 
-lalu saya berikan nama variabel sesuai dengan page dataset description pada situs tersebut. Untuk mempersimple kasus ini, maka saya akan mereduksi kasus ini menjadi kasus klasifikasi biner dengan membuat variabel kelas selain pp menjadi kelas other. 
+lalu saya berikan nama variabel sesuai dengan halaman dataset description pada situs tersebut. Untuk mempersimple kasus ini, maka saya akan mereduksi kasus ini menjadi kasus klasifikasi biner dengan membuat variabel kelas selain pp menjadi kelas other. 
 
-```{r biner}
+```{r}
 ecoli$class=ifelse(ecoli$class!="pp","other","pp")
 ecoli$class=as.factor(ecoli$class)
 table(ecoli$class)
@@ -53,14 +57,7 @@ ecoli.used=ecoli[,-c(1,5)]
 pairs(ecoli.used[,-ncol(ecoli.used)],col=ecoli.used$class)
 ```
 
-variabel chg tidak diikutsertakan dalam analisis dikarenakan memiliki nilai yang sama untuk semua pengamatan. Berikut scatter plot untuk variabel gvh dan alm2 yang diperbesar
-
-```{r}
-plot(ecoli.used$gvh,ecoli.used$alm2,col=ecoli.used$class,xlab="gvh",ylab="alm2")
-```
-
-
-dapat dilihat bahwa proporsi antara kelas mayor dan minor (rasio imbalance) pada data tersebut yakni sebesar `r IR`. selanjutnya data tersebut akan dibagi kedalam training dan testing menggunakan stratified holdout dengan proporsi 80% training dan 20% testing. Stratified disini bertujuan untuk menjaga rasio kelas imbalance di dalam data train dan data test tetap atau hampir sama dengan data set asal (ecoli).
+variabel chg tidak diikutsertakan dalam analisis dikarenakan memiliki nilai yang sama untuk semua pengamatan. Dapat dilihat bahwa proporsi antara kelas mayor dan minor (rasio imbalance) pada data tersebut yakni sebesar `r IR`. selanjutnya data tersebut akan dibagi kedalam training dan testing menggunakan stratified holdout dengan proporsi 80% training dan 20% testing. Stratified disini bertujuan untuk menjaga rasio kelas imbalance di dalam data train dan data test tetap atau hampir sama dengan data set asal (ecoli).
 
 ```{r message=FALSE}
 library(rminer)
@@ -69,8 +66,9 @@ data.train=ecoli.used[ff$tr,]
 data.test=ecoli.used[ff$ts,]
 ```
 
-classifier yang akan digunakan dalam tutorial ini yakni Support Vector Machine dengan kernel Radial Basis Function (RBF) dengan menggunakan solver libsvm pada package `e1071::svm`. 
-```{r message=FALSE}
+classifier yang akan digunakan dalam tutorial ini yakni Support Vector Machine dengan kernel Radial Basis Function (RBF) dengan menggunakan solver [libsvm](https://www.csie.ntu.edu.tw/~cjlin/libsvm/) pada package `e1071::svm`.  
+
+```{r message=FALSE,warning=FALSE}
 library(e1071)
 library(MLmetrics)
 tuning.svm<- tune(svm, train.x=data.train[,-ncol(data.train)], train.y=data.train[,ncol(data.train)],kernel="radial",ranges=list(cost=10^(-3:3), gamma=c(10^(-2:2))))
@@ -79,14 +77,15 @@ tuning.svm$performances[,-4]
 
 diperoleh parameter terbaik saat melakukan tuning yakni dengan cost=`r tuning.svm$best.parameters[1]` dan gamma=`r tuning.svm$best.parameters[2]`. selanjutnya model akan dibangun pada data training menggunakan parameter tersebut dan melakukan prediksi pada data testing menggunkaan model tersebut. 
 
-```{r}
+```{r warning=FALSE}
 model.svm=svm(class~.,data=data.train,scale=TRUE,kernel="radial",cost=tuning.svm$best.parameters[1],gamma=tuning.svm$best.parameters[2],type="C-classification")
 prediksi.svm=predict(model.svm,data.test[,-ncol(data.test)])
 akurasi.svm=Accuracy(data.test$class,prediksi.svm)
 sensitivity.svm=Sensitivity(data.test$class,prediksi.svm,positive = "pp")
 specificity.svm=Specificity(data.test$class,prediksi.svm,positive = "pp")
 G.mean.svm=sqrt(sensitivity.svm*specificity.svm)
-print(rbind(akurasi.svm,sensitivity.svm,specificity.svm,G.mean.svm))
+hasil.svm=rbind(akurasi.svm,sensitivity.svm,specificity.svm,G.mean.svm)
+hasil.svm
 ```
 
 berdasarkan hasil tersebut, ketepatan klasifikasi untuk kelas mayor (other) sebesar `r specificity.svm` dan ketepatan klasifikasi untuk kelas minor (pp) sebesar `r sensitivity.svm`, sehingga dapat diketahui bahwa classifier SVM yang digunakan cenderung lebih mudah dalam mengklasifikasikan pengamatan ke kelas mayor (other) dibandingkan ke kelas minor (pp). 
@@ -96,7 +95,7 @@ SMOTE merupakan algoritma oversampling yang pada prinsipnya bekerja melakukan du
 sampel sintetis dibentuk berdasarkan persamaan berikut
 
 $$\vec{x_{sintetis}}=\vec{x_i} + (\vec{x_{knn}} -\vec{x_i})rand(0,1)$$
-pada proses membuat data sintetis dengan algoritma SMOTE, saya menggunakan `DMwR::SMOTE`.
+pada proses membuat data sintetis dengan algoritma SMOTE, saya menggunakan `DMwR::SMOTE`. Untuk referensi lebih detil mengenai SMOTE dapat dilihat [disini](https://arxiv.org/pdf/1106.1813.pdf)
 
 ```{r message=FALSE}
 library(DMwR)
@@ -108,18 +107,19 @@ table(data.balance$class)
 
 setelah diperoleh distribusi kelas yang hampir balance, lalu dilakukan klasifikasi menggunakan SVM seperti bagian diatas.
 
-```{r}
+```{r warning=FALSE}
 model.smote.svm=svm(class~.,data=data.balance,scale=TRUE,kernel="radial",cost=tuning.svm$best.parameters[1],gamma=tuning.svm$best.parameters[2],type="C-classification")
 prediksi.smote.svm=predict(model.smote.svm,data.test[,-ncol(data.test)])
 akurasi.smote.svm=Accuracy(data.test$class,prediksi.smote.svm)
 sensitivity.smote.svm=Sensitivity(data.test$class,prediksi.smote.svm,positive = "pp")
 specificity.smote.svm=Specificity(data.test$class,prediksi.smote.svm,positive = "pp")
 G.mean.smote.svm=sqrt(sensitivity.smote.svm*specificity.smote.svm)
-print(rbind(akurasi.smote.svm,sensitivity.smote.svm,specificity.smote.svm,G.mean.smote.svm))
+hasil.smote=rbind(akurasi.smote.svm,sensitivity.smote.svm,specificity.smote.svm,G.mean.smote.svm)
+hasil.smote
 ```
 
 ## ADASYN
-Algoritma ini merupakan algoritma yang berdasar pada pendekatan oversampling sama halnya dengan algoritma SMOTE. Namun yang berbeda yakni ide meberikan suatu distribusi bobot kepada pengamatan kelas minor berdasarkan tingkat kesulitan sampel tersebut untuk dipelajari yang mana nanti digunakan sebagai suatu acuan dalam memutuskan jumlah sampel sintetis yang akan di bangkitkan oleh setiap pengamatan kelas minor secara otomatis. Dengan kata lain setiap sampel kelas minor akan membangkitkan jumlah sampel sintetis yang berbeda-beda tidak seperti algoritma SMOTE yang mana setiap sampel kelas minor berkontribusi membangkitkan jumlah sampel yang sama. 
+Algoritma ini merupakan algoritma yang berdasar pada pendekatan oversampling sama halnya dengan algoritma SMOTE. Namun yang berbeda yakni ide meberikan suatu distribusi bobot kepada pengamatan kelas minor berdasarkan tingkat kesulitan sampel tersebut untuk dipelajari yang mana nanti digunakan sebagai suatu acuan dalam memutuskan jumlah sampel sintetis yang akan di bangkitkan oleh setiap pengamatan kelas minor secara otomatis. Dengan kata lain setiap sampel kelas minor akan membangkitkan jumlah sampel sintetis yang berbeda-beda tidak seperti algoritma SMOTE yang mana setiap sampel kelas minor berkontribusi membangkitkan jumlah sampel yang sama. Sumber referensi yang lebih detil [disini](https://sci2s.ugr.es/keel/pdf/algorithm/congreso/2008-He-ieee.pdf)
 
 ```{r message=FALSE}
 library(smotefamily)
@@ -130,13 +130,49 @@ table(data.balance1$class)
 
 selanjutnya dilakukan proses pembentukan model pada data yang telah balance 
 
-```{r}
+```{r warning=FALSE}
 model.adasyn.svm=svm(class~.,data=data.balance1,scale=TRUE,kernel="radial",cost=tuning.svm$best.parameters[1],gamma=tuning.svm$best.parameters[2],type="C-classification")
 prediksi.adasyn.svm=predict(model.adasyn.svm,data.test[,-ncol(data.test)])
 akurasi.adasyn.svm=Accuracy(data.test$class,prediksi.adasyn.svm)
 sensitivity.adasyn.svm=Sensitivity(data.test$class,prediksi.adasyn.svm,positive = "pp")
 specificity.adasyn.svm=Specificity(data.test$class,prediksi.adasyn.svm,positive = "pp")
 G.mean.adasyn.svm=sqrt(sensitivity.adasyn.svm*specificity.adasyn.svm)
-print(rbind(akurasi.adasyn.svm,sensitivity.adasyn.svm,specificity.adasyn.svm,G.mean.adasyn.svm))
+hasil.adasyn=rbind(akurasi.adasyn.svm,sensitivity.adasyn.svm,specificity.adasyn.svm,G.mean.adasyn.svm)
+hasil.adasyn
 ```
 
+##Random Under Sampling
+Random under sampling atau RUS merupakan algoritma yang paling sederhana dalam penanganan kelas imbalance yakni dengan cara menghapus pengamatan kelas mayoritas secara random hingga diperoleh distribusi kelas yang balance. Contoh implementasinya sebagai berikut
+
+```{r warning=FALSE}
+rus <- function()
+{
+  p <- data.train[which(data.train[ ,"class"] == "pp"), ]
+  n <- data.train[which(data.train[ ,"class"] == "other"), ]
+  n <- n[sample(nrow(n), nrow(p), replace = TRUE), ]
+  result <- rbind(p, n)
+  return(result)
+}
+data.balance2=rus()
+table(data.balance2$class)
+model.rus.svm=svm(class~.,data=data.balance2,scale=TRUE,kernel="radial",cost=tuning.svm$best.parameters[1],gamma=tuning.svm$best.parameters[2],type="C-classification")
+prediksi.rus.svm=predict(model.rus.svm,data.test[,-ncol(data.test)])
+akurasi.rus.svm=Accuracy(data.test$class,prediksi.rus.svm)
+sensitivity.rus.svm=Sensitivity(data.test$class,prediksi.rus.svm,positive = "pp")
+specificity.rus.svm=Specificity(data.test$class,prediksi.rus.svm,positive = "pp")
+G.mean.rus.svm=sqrt(sensitivity.rus.svm*specificity.rus.svm)
+hasil.rus=rbind(akurasi.rus.svm,sensitivity.rus.svm,specificity.rus.svm,G.mean.rus.svm)
+hasil.rus
+```
+
+##3.Kesimpulan
+jika dibandingkan hasil performansi dari semua metode yang digunakan
+
+```{r}
+hasil=cbind(hasil.svm,hasil.smote,hasil.adasyn,hasil.rus)
+colnames(hasil)=c("svm","smote.svm","adasyn.svm","rus.svm")
+row.names(hasil)=c("akurasi","sensitivity","specificity","G-mean")
+hasil
+```
+
+ketiga metode sampling-based dalam penanganan kelas imbalance dapat meningkatkan akurasi dari prediksi kelas minoritas (sensitivity) dan G-mean, namun dari ketiga metode yang digunakan, smote-svm menghasilkan performansi yang paling tinggi pada kasus klasifikasi data ecoli ini. 
