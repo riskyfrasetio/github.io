@@ -295,42 +295,42 @@ library(MLmetrics)
 tuning.svm&lt;- tune(svm, train.x=data.train[,-ncol(data.train)], train.y=data.train[,ncol(data.train)],kernel=&quot;radial&quot;,ranges=list(cost=10^(-3:3), gamma=c(10^(-2:2))))
 tuning.svm$performances[,-4]</code></pre>
 <pre><code>##     cost gamma      error
-## 1  1e-03 1e-02 0.15584046
-## 2  1e-02 1e-02 0.15584046
-## 3  1e-01 1e-02 0.15584046
-## 4  1e+00 1e-02 0.10384615
-## 5  1e+01 1e-02 0.06680912
-## 6  1e+02 1e-02 0.05199430
-## 7  1e+03 1e-02 0.05584046
-## 8  1e-03 1e-01 0.15584046
-## 9  1e-02 1e-01 0.15584046
-## 10 1e-01 1e-01 0.13732194
-## 11 1e+00 1e-01 0.05199430
-## 12 1e+01 1e-01 0.05213675
-## 13 1e+02 1e-01 0.07065527
-## 14 1e+03 1e-01 0.08931624
-## 15 1e-03 1e+00 0.15584046
-## 16 1e-02 1e+00 0.15584046
-## 17 1e-01 1e+00 0.15199430
-## 18 1e+00 1e+00 0.05940171
-## 19 1e+01 1e+00 0.07051282
-## 20 1e+02 1e+00 0.07421652
-## 21 1e+03 1e+00 0.07421652
-## 22 1e-03 1e+01 0.15584046
-## 23 1e-02 1e+01 0.15584046
-## 24 1e-01 1e+01 0.15584046
-## 25 1e+00 1e+01 0.15584046
-## 26 1e+01 1e+01 0.14843305
-## 27 1e+02 1e+01 0.14843305
-## 28 1e+03 1e+01 0.14843305
-## 29 1e-03 1e+02 0.15584046
-## 30 1e-02 1e+02 0.15584046
-## 31 1e-01 1e+02 0.15584046
-## 32 1e+00 1e+02 0.15584046
-## 33 1e+01 1e+02 0.15584046
-## 34 1e+02 1e+02 0.15584046
-## 35 1e+03 1e+02 0.15584046</code></pre>
-<p>diperoleh parameter terbaik saat melakukan tuning yakni dengan cost=100 dan gamma=0.01. selanjutnya model akan dibangun pada data training menggunakan parameter tersebut dan melakukan prediksi pada data testing menggunkaan model tersebut.</p>
+## 1  1e-03 1e-02 0.15612536
+## 2  1e-02 1e-02 0.15612536
+## 3  1e-01 1e-02 0.15612536
+## 4  1e+00 1e-02 0.10413105
+## 5  1e+01 1e-02 0.05598291
+## 6  1e+02 1e-02 0.04843305
+## 7  1e+03 1e-02 0.04857550
+## 8  1e-03 1e-01 0.15612536
+## 9  1e-02 1e-01 0.15612536
+## 10 1e-01 1e-01 0.13005698
+## 11 1e+00 1e-01 0.05213675
+## 12 1e+01 1e-01 0.04102564
+## 13 1e+02 1e-01 0.06339031
+## 14 1e+03 1e-01 0.07806268
+## 15 1e-03 1e+00 0.15612536
+## 16 1e-02 1e+00 0.15612536
+## 17 1e-01 1e+00 0.15612536
+## 18 1e+00 1e+00 0.04458689
+## 19 1e+01 1e+00 0.07065527
+## 20 1e+02 1e+00 0.08176638
+## 21 1e+03 1e+00 0.08176638
+## 22 1e-03 1e+01 0.15612536
+## 23 1e-02 1e+01 0.15612536
+## 24 1e-01 1e+01 0.15612536
+## 25 1e+00 1e+01 0.15242165
+## 26 1e+01 1e+01 0.13746439
+## 27 1e+02 1e+01 0.13746439
+## 28 1e+03 1e+01 0.13746439
+## 29 1e-03 1e+02 0.15612536
+## 30 1e-02 1e+02 0.15612536
+## 31 1e-01 1e+02 0.15612536
+## 32 1e+00 1e+02 0.15612536
+## 33 1e+01 1e+02 0.15612536
+## 34 1e+02 1e+02 0.15612536
+## 35 1e+03 1e+02 0.15612536</code></pre>
+<p>diperoleh parameter terbaik saat melakukan tuning yakni dengan cost=10 dan gamma=0.1. selanjutnya model akan dibangun pada data training menggunakan parameter tersebut dan melakukan prediksi pada data testing menggunkaan model tersebut.</p>
 <pre class="r"><code>model.svm=svm(class~.,data=data.train,scale=TRUE,kernel=&quot;radial&quot;,cost=tuning.svm$best.parameters[1],gamma=tuning.svm$best.parameters[2],type=&quot;C-classification&quot;)
 prediksi.svm=predict(model.svm,data.test[,-ncol(data.test)])
 akurasi.svm=Accuracy(data.test$class,prediksi.svm)
@@ -348,7 +348,8 @@ hasil.svm</code></pre>
 <div id="smote" class="section level2">
 <h2>SMOTE</h2>
 <p>SMOTE merupakan algoritma oversampling yang pada prinsipnya bekerja melakukan duplikasi dengan membuat data sintetis pada kelas minor berdasarkan k-tetangga terdekat yang diperoleh dengan menghitung jarak euclidean terdekat terhadap pengamatan yang akan di duplikasi. Jumlah duplikasi yang dilakukan ditentukan sedemikian rupa sehingga nantinya rasio antara kelas mayor dan kelas minor + kelas minor sintetis akan mendekati balance. sampel sintetis dibentuk berdasarkan persamaan berikut</p>
-<p><span class="math display">\[\vec{x_{sintetis}}=\vec{x_i} + (\vec{x_{knn}} -\vec{x_i})rand(0,1)\]</span> pada proses membuat data sintetis dengan algoritma SMOTE, saya menggunakan <code>DMwR::SMOTE</code>. Untuk referensi lebih detil mengenai SMOTE dapat dilihat <a href="https://arxiv.org/pdf/1106.1813.pdf">disini</a></p>
+<p><span class="math display">\[\vec{x_{sintetis}}=\vec{x_i} + (\vec{x_{knn}} -\vec{x_i})rand(0,1)\]</span></p>
+<p>pada proses membuat data sintetis dengan algoritma SMOTE, saya menggunakan <code>DMwR::SMOTE</code>. Untuk referensi lebih detil mengenai SMOTE dapat dilihat <a href="https://arxiv.org/pdf/1106.1813.pdf">disini</a></p>
 <pre class="r"><code>library(DMwR)
 datamayor=data.train[data.train[,ncol(data.train)]==&quot;other&quot;,]
 dataminor.baru=SMOTE(class~.,data.train,k=5,perc.over = 400,perc.under=0)
@@ -422,10 +423,10 @@ G.mean.rus.svm=sqrt(sensitivity.rus.svm*specificity.rus.svm)
 hasil.rus=rbind(akurasi.rus.svm,sensitivity.rus.svm,specificity.rus.svm,G.mean.rus.svm)
 hasil.rus</code></pre>
 <pre><code>##                          [,1]
-## akurasi.rus.svm     0.9552239
+## akurasi.rus.svm     0.9402985
 ## sensitivity.rus.svm 0.9000000
-## specificity.rus.svm 0.9649123
-## G.mean.rus.svm      0.9318911</code></pre>
+## specificity.rus.svm 0.9473684
+## G.mean.rus.svm      0.9233805</code></pre>
 </div>
 <div id="kesimpulan" class="section level2">
 <h2>3.Kesimpulan</h2>
@@ -435,10 +436,10 @@ colnames(hasil)=c(&quot;svm&quot;,&quot;smote.svm&quot;,&quot;adasyn.svm&quot;,&
 row.names(hasil)=c(&quot;akurasi&quot;,&quot;sensitivity&quot;,&quot;specificity&quot;,&quot;G-mean&quot;)
 hasil</code></pre>
 <pre><code>##                   svm smote.svm adasyn.svm   rus.svm
-## akurasi     0.9701493 0.9850746  0.9701493 0.9552239
+## akurasi     0.9701493 0.9850746  0.9701493 0.9402985
 ## sensitivity 0.8000000 0.9000000  0.9000000 0.9000000
-## specificity 1.0000000 1.0000000  0.9824561 0.9649123
-## G-mean      0.8944272 0.9486833  0.9403247 0.9318911</code></pre>
+## specificity 1.0000000 1.0000000  0.9824561 0.9473684
+## G-mean      0.8944272 0.9486833  0.9403247 0.9233805</code></pre>
 <p>ketiga metode sampling-based dalam penanganan kelas imbalance dapat meningkatkan akurasi dari prediksi kelas minoritas (sensitivity) dan G-mean, namun dari ketiga metode yang digunakan, smote-svm menghasilkan performansi yang paling tinggi pada kasus klasifikasi data ecoli ini.</p>
 </div>
 </div>
@@ -467,7 +468,7 @@ hasil</code></pre>
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://riskyfrasetio.github.io/2018/12/analisis-tweet-cpns-2018-menggunakan-r/" data-tooltip="Analisis Tweet CPNS 2018 Menggunakan R">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -553,7 +554,7 @@ hasil</code></pre>
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://riskyfrasetio.github.io/2018/12/analisis-tweet-cpns-2018-menggunakan-r/" data-tooltip="Analisis Tweet CPNS 2018 Menggunakan R">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -690,6 +691,23 @@ hasil</code></pre>
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://riskyfrasetio.github.io/2018/12/analisis-tweet-cpns-2018-menggunakan-r/">
+                <h3 class="media-heading">Analisis Tweet CPNS 2018 Menggunakan R</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">body {text-align: justify}PendahuluanBabak baru seleksi calon pegawai negeri sipil 2018 telah dimulai dengan dikeluarkannya surat keputusan Kementerian PAN-RB permenpan No 61 tahun 2018 mengenai optimalisasi pemenuhan kebutuhan/formasi pegawai negeri sipil dalam seleksi calon pegawai negeri sipil tahun 2018. Bagaimana isi nya? Bisa dibaca sendiri ya disini hehe. Seleksi CPNS tahun 2018 ini memang banyak menyedot antusiasme masyarakat untuk berkompetisi menjadi calon aparatur sipil negara.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -853,24 +871,6 @@ summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://riskyfrasetio.github.io/2014/08/hidden-pagination-showcase/">
-                <h3 class="media-heading">Hidden pagination showcase</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2014
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>This post is used to show how a site looks if the pagination is hidden.
-</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -878,7 +878,7 @@ summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         14 posts found
+         15 posts found
       </p>
     </div>
   </div>
